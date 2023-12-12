@@ -158,17 +158,17 @@ def process_and_save_images(image_path, output_dir):
 
     # Apply Canny Edge Detection
     canny_edges = canny_edge_detection(
-        blurred_image, low_threshold=10, high_threshold=65
+        blurred_image, low_threshold=10, high_threshold=25
     )
     canny_edges_path = os.path.join(output_dir, f"{base_name}_q2.png")
     cv2.imwrite(canny_edges_path, canny_edges)
 
     # Apply Hough Transform
-    hough_acc, thetas, rhos = hough_transform(canny_edges, threshold=50)
+    hough_acc, thetas, rhos = hough_transform(canny_edges, threshold=120)
 
     # Draw Hough Lines
     hough_lines_image = draw_hough_lines_on_image(
-        original_image, hough_acc, rhos, thetas, threshold=60
+        original_image, hough_acc, rhos, thetas, threshold=30
     )
     hough_lines_image_path = os.path.join(output_dir, f"{base_name}_q3.png")
     cv2.imwrite(hough_lines_image_path, hough_lines_image)
